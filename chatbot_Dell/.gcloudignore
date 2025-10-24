@@ -1,0 +1,12 @@
+ Don’t upload local stuff
+.venv/
+.env
+*.pyc
+__pycache__/
+.git
+.gitignore
+.DS_Store
+# Big files you don’t need in the image (edit to your needs)
+*.ipynb
+data/raw/
+models/
