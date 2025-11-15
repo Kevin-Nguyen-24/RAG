@@ -40,11 +40,27 @@ The application will open at `http://localhost:8501`
 └── data/                           # ESG PDF reports and databases
 ```
 
+## Usage Examples
+
+### ESG Metrics Query
+```
+Question: What was Absa's total energy use in 2022?
+Answer: Total energy: 215,963,015 kWh
+        Source: 2022-Absa-Group-limited-ESG-Data-sheet.pdf
+```
+
+### Company Comparison Query
+```
+Question: Compare Clicks and Pick n Pay sustainability goals
+Answer: Clicks: Carbon neutral by 2030
+        Pick n Pay: 10% reduction by 2025
+```
+
 ## Configuration
 
 Create a `.env` file in the project root:
 ```env
-OLLAMA_API_URL=https://your-ollama-endpoint.com
+OLLAMA_API_URL=https://ollama-gemma-324573599995.us-central1.run.app
 OLLAMA_MODEL=gemma3:4b
 QDRANT_COLLECTION_NAME=esg_financial_reports
 MAX_CONVERSATION_HISTORY=20
@@ -117,6 +133,32 @@ Test categories:
 - Comprehensive evaluation framework with 11 metrics
 - Modular architecture for easy extension
 
+## Troubleshooting
+
+### Database Lock Error
+```bash
+# Windows PowerShell
+Get-Process python* -ErrorAction SilentlyContinue | Stop-Process -Force
+Remove-Item -Path "data\qdrant_db\.lock" -Force -ErrorAction SilentlyContinue
+
+# Linux/Mac
+pkill python
+rm -f data/qdrant_db/.lock
+```
+
+### Re-ingest Documents
+```bash
+python scripts/ingest_esg_documents.py --clear
+```
+
+### Clear Conversation Memory
+```bash
+# Windows
+Remove-Item data/memory.db
+
+# Linux/Mac
+rm data/memory.db
+```
 
 ## Technologies Used
 
@@ -157,3 +199,8 @@ The system was evaluated using 22 test queries with ground truth answers across 
 python scripts/run_evaluation.py
 ```
 
+Results are saved to `evaluation_results/` with detailed HTML reports and visualizations.
+
+## License
+
+MIT

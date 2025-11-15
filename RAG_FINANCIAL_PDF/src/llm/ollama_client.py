@@ -92,10 +92,10 @@ class OllamaClient:
         try:
             # Prepare the request payload
             payload = {
-                "model": "gemma3:4b",  # Use the actual model name from the API
+                "model": self.model,
                 "prompt": prompt,
                 "options": {
-                    "temperature": temperature or self.temperature,
+                    "temperature": (0.0 if temperature is None else temperature),
                     "num_predict": max_tokens or self.max_tokens,
                 },
                 "stream": stream
@@ -142,10 +142,10 @@ class OllamaClient:
         """
         try:
             payload = {
-                "model": "gemma3:4b",  # Use the actual model name from the API
+                "model": self.model,
                 "messages": messages,
                 "options": {
-                    "temperature": temperature or self.temperature,
+                    "temperature": (0.0 if temperature is None else temperature),
                     "num_predict": max_tokens or self.max_tokens,
                 },
                 "stream": False

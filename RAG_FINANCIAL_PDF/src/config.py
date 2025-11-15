@@ -10,7 +10,7 @@ load_dotenv()
 
 class OllamaConfig(BaseModel):
     """Ollama LLM API configuration."""
-    api_url: str = os.getenv("OLLAMA_API_URL", "https://ollama-gemma-235329445359.us-central1.run.app")
+    api_url: str = os.getenv("OLLAMA_API_URL", "https://ollama-gemma-324573599995.us-central1.run.app")
     model: str = os.getenv("OLLAMA_MODEL", "gemma3:4b")
     timeout: int = 180
     max_tokens: int = 2048
